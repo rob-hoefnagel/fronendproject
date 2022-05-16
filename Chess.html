@@ -106,6 +106,7 @@
         }
 
         function verwijderenUnit(id){
+            alert("wordt verwijdert");
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if(this.readyState == 4){
@@ -116,6 +117,52 @@
             xhr.open("DELETE","http://localhost:8082/deleteUnit/" + id,true);
             xhr.send();
         }
+
+        function onStartUp(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4){
+                    console.log(this.responseText);
+                    var allUnits = JSON.parse(this.responseText);
+                    var select = document.getElementById("dropwdownUnits");
+                    select.innerHTML = "";
+                    for (var i =0; i<allUnits.length; i++){
+                        var unitOption = document.createElement('option');
+                        unitOption.value = allUnits[i].id;
+                        select.appendChild(unitOption);
+                        unitOption.innerHTML = allUnits[i].name;
+
+                    }
+                    
+                }
+            }
+            xhr.open("GET","http://localhost:8082/totalUnits", true);
+            xhr.send();
+        }
+
+        function controleerWaarde(){
+            var myValue = document.getElementById("dropwdownUnits");
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4){
+                    var unit = JSON.parse(this.responseText);
+                    alert(unit.attack);
+                    var span = document.getElementById("unitAttack");
+                    var span2 = document.getElementById("unitDefence");
+                    span.innerHTML = unit.attack;
+                    span2.innerHTML = unit.defence;
+
+                }
+            }
+
+            xhr.open("GET","http://localhost:8082/unit/"+ myValue.value, true);
+            xhr.send();
+        }
+
+
+
+
+        onStartUp();
         
 
     </script>
@@ -140,9 +187,19 @@
 
     <hr>
 
-    
+    <select id="dropwdownUnits">
+    </select>
+
+    <select id="Unit2">
+        <option value="">text</option>
+        <option value="">text</option>
+    </select>
+
+    <button id="mijnButton" onclick="controleerWaarde()">check waarde</button>
+
+    <span id="unitAttack"></span>
  
-    
+    <span id="unitDefence"></span>
 
     <hr>
 
