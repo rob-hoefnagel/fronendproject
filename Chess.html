@@ -91,7 +91,10 @@
 
         function unitAanmaken(){
             var deUnit ={};
-            deUnit.attack = document.getElementById("unitId").value;
+            deUnit.name = document.getElementById("aanmaakName").value;
+            deUNit.attack = document.getElementById("aanmaakAttack").value;
+            deUNit.defence = document.getElementById("aanmaakDefence").value;
+            deUNit.type = document.getElementById("aanmaakType").value;
             var deJSON = JSON.stringify(deUnit);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
@@ -175,7 +178,10 @@
     <button onclick="toonUnits()">toon units</button>
     <div id="alleUnitsTabel"></div>
 
-    <input type="text" placeholder="id" id="unitId">
+    <input type="text" placeholder="name" id="aanmaakName">
+    <input type="text" placeholder="attack" id="aanmaakAttack">
+    <input type="text" placeholder="defence" id="aanmaakDefence">
+    <input type="text" placeholder="Type" id="aanmaakType">
     <button onclick="unitAanmaken()">Add Unit</button>
 
     <hr>
