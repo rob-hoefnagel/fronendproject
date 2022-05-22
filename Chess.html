@@ -1,221 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="javascript" href="javascript.js">
     <title>chessgame</title>
 
-    <style>
-
-        .backgrond{
-            background-repeat: no-repeat;
-            size: cover;          
-        }
-
-        .logo{
-            position: relative;
-            background-color: black;
-            size: 50px;
-
-        }
-   
-
-
-
-    </style>
-
-    <script>
-
-        function opslaan(){
-            // Formulier uitlezen
-            let nameInvoer = document.getElementById('nieuweSpeler').value;
-            
-            // Maak het javascript object aan
-            let newUnit = {
-                nickname: nameInvoer
-            }
-
-            fetch("http://localhost:8082/newPlayer2", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newUnit)
-            })
-                .then(response => {
-                    alert('Is goedgegaan');
-                })
-                .catch(error => {
-                    alert('Er is iets fouts gegaan: ' + error);
-                });
-        }
-
-        function spelersOphalen(){
-            document.getElementById("uitkomstAlles").innerHTML = "";
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    console.log(this.responseText);
-                    var antwoordlijst = JSON.parse(this.responseText);
-                    // document.getElementById
-                    for (var x = 0; x < antwoordlijst.length; x++) {
-                        document.getElementById("uitkomstAlles").innerHTML += "<h1>"+ antwoordlijst[x].nickname + "</h1>";
-                    }
-                    // document.getElementById("uitkomst").innerHTML = antwoord.name;
-                }
-            }
-            xhr.open("Get", "http://localhost:8082/totaalSpelers", true);
-            xhr.send();
-        }
-
-        function toonUnits(){
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if(this.readyState == 4){
-                    console.log(this.responseText);
-                    var allUnits = JSON.parse(this.responseText);
-                    var eindString = "<table border=1>";
-                    for(var i=0; i< allUnits.length; i++){
-                        console.log(allUnits[i].id);
-                        eindString += "<tr><td>" + allUnits[i].id + "</td><td><button onclick=verwijderenUnit("+allUnits[i].id+")>delete</button></td></tr>";
-                    }
-                    eindString += "</table>";
-                    document.getElementById("alleUnitsTabel").innerHTML = eindString;
-                }
-             
-            }
-            xhr.open("GET","http://localhost:8082/totalUnits", true);
-            xhr.send();
-        }
-
-        function unitAanmaken(){
-            var deUnit ={};
-            deUnit.name = document.getElementById("aanmaakName").value;
-            deUNit.attack = document.getElementById("aanmaakAttack").value;
-            deUNit.defence = document.getElementById("aanmaakDefence").value;
-            deUNit.type = document.getElementById("aanmaakType").value;
-            var deJSON = JSON.stringify(deUnit);
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if(this.readyState == 4){
-                    console.log("toevoegen gelukt");
-                }
-             
-            }
-            xhr.open("POST","http://localhost:8082/newUnit", true);
-            xhr.setRequestHeader("Content-Type","application/json")
-            xhr.send(deJSON);
-        }
-
-        function verwijderenUnit(id){
-            alert("wordt verwijdert");
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if(this.readyState == 4){
-                    
-                }
-             
-            }
-            xhr.open("DELETE","http://localhost:8082/deleteUnit/" + id,true);
-            xhr.send();
-        }
-
-        function onStartUp(){
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if(this.readyState == 4){
-                    console.log(this.responseText);
-                    var allUnits = JSON.parse(this.responseText);
-                    var select = document.getElementById("dropwdownUnits");
-                    select.innerHTML = "";
-                    for (var i =0; i<allUnits.length; i++){
-                        var unitOption = document.createElement('option');
-                        unitOption.value = allUnits[i].id;
-                        select.appendChild(unitOption);
-                        unitOption.innerHTML = allUnits[i].name;
-
-                    }
-                    
-                }
-            }
-            xhr.open("GET","http://localhost:8082/totalUnits", true);
-            xhr.send();
-        }
-
-        function controleerWaarde(){
-            var myValue = document.getElementById("dropwdownUnits");
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if(this.readyState == 4){
-                    var unit = JSON.parse(this.responseText);
-                    alert(unit.attack);
-                    var span = document.getElementById("unitAttack");
-                    var span2 = document.getElementById("unitDefence");
-                    span.innerHTML = unit.attack;
-                    span2.innerHTML = unit.defence;
-
-                }
-            }
-
-            xhr.open("GET","http://localhost:8082/unit/"+ myValue.value, true);
-            xhr.send();
-        }
-
-
-
-
-        onStartUp();
-        
-
-    </script>
+    
+    <script src="javascript.js"> </script>
 
 </head>
 
 <body>
-    
-    
-    <button onclick="toonUnits()">toon units</button>
-    <div id="alleUnitsTabel"></div>
 
+    <div id="topDiv">
+
+        <div class="topBar">
+            <a class="active" href="#homepage">homepage</a>
+            <a href="#buy">Buy</a>
+            <a href="#account">Account</a>
+        </div>
+
+        <div id="imageDiv">
+            <img src="">
+        </div>
+
+        <div id="alleUnitsTabel">
+        <button id="div1Button" onclick="toonUnits()">toon units</button>
+        </div>
+
+    </div>  
+
+    <hr>
+
+    <div id="secondDiv">
+
+    <p><h3>Maak hier een unit aan</h3></p>
     <input type="text" placeholder="name" id="aanmaakName">
     <input type="text" placeholder="attack" id="aanmaakAttack">
     <input type="text" placeholder="defence" id="aanmaakDefence">
     <input type="text" placeholder="Type" id="aanmaakType">
-    <button onclick="unitAanmaken()">Add Unit</button>
+    <button onclick="unitAanmaken(); refreshPage()">Add Unit</button>
+
+
+    </div>
 
     <hr>
 
-    <input type="text" id="nieuweSpeler">
+    <!-- <input type="text" id="nieuweSpeler">
     <button onclick="spelersOphalen()">alles spelers ophalen</button>
-    <button id="save" onclick= "opslaan()">Save</button>
-    <div id="uitkomstAlles"></div>
+    <button id="save" onclick="opslaan()">Save</button>
+    <div id="uitkomstAlles"></div> -->
+
+    <!-- <hr> -->
+
+    <p>verwijder hier een unit</p>
+
+    <button>verwijder Unit</button>
 
     <hr>
 
-    <select id="dropwdownUnits">
-    </select>
+    <div id="tabelOverzicht">
+        <table id="unitTabel">
 
-    <select id="Unit2">
-        <option value="">text</option>
-        <option value="">text</option>
-    </select>
+            <thead>
+                <tr>
 
-    <button id="mijnButton" onclick="controleerWaarde()">check waarde</button>
+                    <th>Name</th>
+                    <th>Attack</th>
+                    <th>Defence</th>
+                    <th>Type</th>
 
-    <span id="unitAttack"></span>
- 
-    <span id="unitDefence"></span>
+                </tr>
 
-    <hr>
 
-    
-<!-- 
-    <div id="background"><img src="https://res.cloudinary.com/rebelwalls/image/upload/b_black,c_fill,f_auto,fl_progressive,h_533,q_auto,w_800/v1600779960/article/R17351_image1"></div>
+            </thead>
 
-    <div id="logo"> <img src=" https://mpng.subpng.com/20181110/srt/kisspng-computer-icons-login-scalable-vector-graphics-emai-5be7376911c6b4.4735764415418796570728.jpg"></div> -->
-      
+            <tbody id="tableRow1">
+
+               
+            </tbody>
+
+            <div id="select2Button">
+                <select id="select2">
+                    <option></option>
+                </select>
+            </div>
+
+            <div id="onclickToevoegButton">
+                <button id="voegtoeAanLijst" onclick="toevoegenAanTabel()">voeg to aan lijst</button>
+            </div>
+
+
+
+        </table>
+    </div>
 
 
 </body>
+
 </html>

@@ -1,0 +1,86 @@
+body{
+    background-color: aliceblue;
+}
+
+.topBar {
+    background-color: rgb(181, 193, 243);
+    overflow: hidden;
+    text-align: center;
+}
+
+.topBar a {
+    position:relative;
+    color: #f8f8f8;
+    text-align: center;
+    padding: 100px 100px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  .topBar a:hover {
+    background-color: rgb(205, 223, 236);
+    color: black;
+}
+
+.topBar a.active {
+    background-color: rgb(205, 223, 236);
+    color: black;
+  }
+
+#topDiv{
+    background-color: aliceblue;
+    height: 200px;
+    position: relative;
+    
+}
+
+#imageDiv{
+    float:left;
+    background-color: bisque;
+}
+
+#secondDiv{
+    background-color: aliceblue;
+    height: 200px;
+    position: relative;
+    text-align: center;
+}
+
+#alleUnitsTabel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+    
+}
+
+
+th,td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#data{
+    margin-bottom: 10px;
+}
+
+
+#select2Button {
+    padding: 10px;
+    float: left;
+
+}
+
+#onclickToevoegButton {
+   width: 90px;
+   padding: 5px;
+   float: left;
+
+}
+
+#tabelOverzicht {
+    flex-direction: colum;
+    align-items: top;
+
+}
+
