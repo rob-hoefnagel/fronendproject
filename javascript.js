@@ -118,12 +118,38 @@ function onStartUp() {
                 unitOptionEdit.value = allUnits[i].id;
                 editdropdown.appendChild(unitOptionEdit);
                 unitOptionEdit.innerHTML = allUnits[i].name;
-            }
+            } 
+            abc();
 
         }
     }
-    xhr.open("GET", "http://localhost:8082/totalUnits", true);
+    xhr.open("GET", "http://localhost:8082/totalUnits", true);    
     xhr.send();
+
+}
+
+function abc(){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+        var dropdown =document.getElementById("select4");
+        select4.innerHTML="";
+        var totaleLijst = JSON.parse(this.responseText);
+        console.log(totaleLijst);
+            for (var i=0; i<totaleLijst.length; i++){
+                var selectLijst = document.createElement("option");
+                selectLijst.id = totaleLijst[i].naam;
+                select4.appendChild(selectLijst);
+                selectLijst.innerHTML = totaleLijst[i].naam;
+
+
+            }
+            
+        }
+    }
+    xhr.open("GET", "http://localhost:8082/toonLijsten", true);
+    xhr.send();
+    
 }
 
 function toevoegenAanTabel() {
@@ -149,6 +175,22 @@ function removeRow (){
 function refreshPage(){
         window.location.reload();
     } 
+
+function lijstOphalen(){
+        var verkregenLijst = document.getElementById("").value;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                console.log(this.responseText);
+                var lisjt = JSON.parse(this.responseText);
+                
+    
+            }
+    
+        }
+       xhr.open("GET", "http://localhost:8082/toonLijsten", true);
+       xhr.send();
+    }
 
 
 
