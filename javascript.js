@@ -52,6 +52,7 @@ function wijzigGekozenUnit(){
         if (this.readyState == 4) {
             console.log(this.responseText);
             var unit = JSON.parse(this.responseText);
+            document.getElementById("editunitid").value = unit.id;
             document.getElementById("editunitname").value=unit.name;
             document.getElementById("editunitattack").value=unit.attack;
             document.getElementById("editunitdefence").value=unit.defence;
@@ -70,7 +71,13 @@ function annuleerWijziging(){
     document.getElementById("allestukkenedit").hidden = true;     
 }
 function wijzigUnit(){
-    alert("TODO wijzigen nieuwe gegevens");
+    var deUnit = {};
+    deUnit.id = document.getElementById("editunitid").value;
+    deUnit.name = document.getElementById("editunitname").value;
+    deUnit.attack = document.getElementById("editunitattack").value;
+    deUnit.defence = document.getElementById("editunitdefence").value;
+    deUnit.type = document.getElementById("editunittype").value;
+    var deUnitJSON = JSON.stringify(deUnit); 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -78,8 +85,9 @@ function wijzigUnit(){
         }
 
     }
-   xhr.open("GET", "http://localhost:8082/unit/2", true);
-   xhr.send();
+   xhr.open("POST", "http://localhost:8082/editUnit", true);
+   xhr.setRequestHeader("Content-Type","application/json");
+   xhr.send(deUnitJSON);
 
 
     
