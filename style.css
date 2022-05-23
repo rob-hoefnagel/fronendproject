@@ -45,6 +45,9 @@ body{
     position: relative;
     text-align: center;
 }
+.tabelcentraal{
+    margin: 0 auto;
+}
 
 #alleUnitsTabel{
   display: flex;
