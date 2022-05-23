@@ -47,7 +47,21 @@ function verwijderUnit(id) {
 }
 function wijzigGekozenUnit(){
     var idUnit = document.getElementById("dropdownEditUnits").value;
-    console.log("id unit: "+idUnit);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            console.log(this.responseText);
+            var unit = JSON.parse(this.responseText);
+            document.getElementById("editunitname").value=unit.name;
+            document.getElementById("editunitattack").value=unit.attack;
+            document.getElementById("editunitdefence").value=unit.defence;
+            document.getElementById("editunittype").value=unit.type;
+
+        }
+
+    }
+   xhr.open("GET", "http://localhost:8082/unit/"+idUnit, true);
+   xhr.send();
     document.getElementById("allestukkendropdown").hidden = true;  
     document.getElementById("allestukkenedit").hidden = false;  
 }
@@ -56,7 +70,19 @@ function annuleerWijziging(){
     document.getElementById("allestukkenedit").hidden = true;     
 }
 function wijzigUnit(){
-    console.log("hij wijzigt");
+    alert("TODO wijzigen nieuwe gegevens");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            console.log(this.responseText);
+        }
+
+    }
+   xhr.open("GET", "http://localhost:8082/unit/2", true);
+   xhr.send();
+
+
+    
 }
 function onStartUp() {
     var xhr = new XMLHttpRequest();
