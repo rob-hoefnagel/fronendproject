@@ -7,7 +7,7 @@ function toonAlleSpellen(){
             var deDiv = document.getElementById("allespellen");
             deDiv.innerHTML = "";
             for(var x =0; x<alleSpellen.length ; x++){
-                deDiv.innerHTML += alleSpellen[x].name+"<br>";
+                deDiv.innerHTML += alleSpellen[x].name+"<input type=button onclick=\"gaNaarGame("+ alleSpellen[x].id+")\" value=\"Ga Naar Game\"><br>";
             }
         }
     }
@@ -32,7 +32,9 @@ function maakGameAan(){
    xhr.setRequestHeader("Content-Type","application/json");
    xhr.send(degameJSON);
 }
-
+function gaNaarGame(gameid){
+    window.location = "./lobby.html?gameid="+gameid;
+}
 /*
 function XXXXXXXXXXXX(){
     var xhr = new XMLHttpRequest();
