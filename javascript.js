@@ -9,25 +9,7 @@ function opslaan() {
 }
 
 
-function toonUnits() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            console.log(this.responseText);
-            var allUnits = JSON.parse(this.responseText);
-            var eindString = "<table border=1>";
-            for (var i = 0; i < allUnits.length; i++) {
-                console.log(allUnits[i].id);
-                eindString += "<tr><td>" + allUnits[i].id + "</td><td><button onclick=verwijderenUnit(" + allUnits[i].id + ")>delete</button></td></tr>";
-            }
-            eindString += "</table>";
-            document.getElementById("alleUnitsTabel").innerHTML = eindString;
-        }
 
-    }
-    xhr.open("GET", "http://localhost:8082/totalUnits", true);
-    xhr.send();
-}
 
 function unitAanmaken() {
     var deUnit = {};
@@ -48,16 +30,19 @@ function unitAanmaken() {
     xhr.send(deJSON);
 }
 
-function verwijderenUnit(id) {
+function verwijderUnit(id) {
+    var myValue3 = document.getElementById("select3").value;
     alert("wordt verwijdert");
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
+            console.log(myValue3);
+            var unit2 = JSON.parse(this.responseText);
 
         }
 
     }
-    xhr.open("DELETE", "http://localhost:8082/deleteUnit/" + id, true);
+    xhr.open("DELETE", "http://localhost:8082/deleteUnit/" + myValue3.value, true);
     xhr.send();
 }
 
@@ -69,11 +54,17 @@ function onStartUp() {
             var allUnits = JSON.parse(this.responseText);
             var tabel = document.getElementById("select2");
             select2.innerHTML = "";
+            var tabel = document.getElementById("select3");
+            select2.innerHTML = "";
             for (var i = 0; i < allUnits.length; i++) {
                 var unitOption2 = document.createElement('option');
                 unitOption2.value = allUnits[i].id;
                 select2.appendChild(unitOption2);
                 unitOption2.innerHTML = allUnits[i].name;
+                var unitOption3 = document.createElement('option');
+                unitOption3.value = allUnits[i].id;
+                select3.appendChild(unitOption3);
+                unitOption3.innerHTML = allUnits[i].name;
             }
 
         }
@@ -102,9 +93,10 @@ function removeRow (){
       tr.parentNode.removeChild(tr);
     }
 
-    function refreshPage(){
+function refreshPage(){
         window.location.reload();
     } 
+
 
 
 onStartUp();
@@ -140,3 +132,23 @@ onStartUp();
     //         .catch(error => {
     //             alert('Er is iets fouts gegaan: ' + error);
     //         });
+
+    // function toonUnits() {
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.onreadystatechange = function () {
+    //         if (this.readyState == 4) {
+    //             console.log(this.responseText);
+    //             var allUnits = JSON.parse(this.responseText);
+    //             var eindString = "<table border=1>";
+    //             for (var i = 0; i < allUnits.length; i++) {
+    //                 console.log(allUnits[i].id);
+    //                 eindString += "<tr><td>" + allUnits[i].id + "</td><td><button onclick=verwijderenUnit(" + allUnits[i].id + ")>delete</button></td></tr>";
+    //             }
+    //             eindString += "</table>";
+    //             document.getElementById("alleUnitsTabel").innerHTML = eindString;
+    //         }
+    
+    //     }
+    //     xhr.open("GET", "http://localhost:8082/totalUnits", true);
+    //     xhr.send();
+    // }

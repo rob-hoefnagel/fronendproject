@@ -29,7 +29,7 @@ body{
 
 #topDiv{
     background-color: aliceblue;
-    height: 200px;
+    height: 150px;
     position: relative;
     
 }
@@ -41,7 +41,7 @@ body{
 
 #secondDiv{
     background-color: aliceblue;
-    height: 200px;
+    height: 150px;
     position: relative;
     text-align: center;
 }
@@ -50,7 +50,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 150px;
     
 }
 
@@ -80,7 +80,16 @@ th,td {
 
 #tabelOverzicht {
     flex-direction: colum;
-    align-items: top;
+    display: flex;
+    justify-content: center;
+    height: 150px;
 
+}
+
+#verwijderUnit{
+    background-color: aliceblue;
+    height: 150px;
+    position: relative;
+    text-align: center;
 }
 
