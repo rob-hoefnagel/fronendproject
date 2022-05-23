@@ -50,19 +50,14 @@
 
             <div class="tabelcentraal" id="allestukkendropdown">
                 <select id="dropdownEditUnits">
-                 <!--   <option value="1">Koning</option>
-                    <option value="2">Koning</option>
-                    <option value="15">Koning</option>
-                    <option value="3">Koning</option>
-                    <option value="7">Koning</option>-->
                 </select>
                 <button onclick="wijzigGekozenUnit()">Wijzig</button>
             </div>
             <div class="tabelcentraal" id="allestukkenedit" hidden>
-                <input type="text" placeholder="name">
-                <input type="text" placeholder="attack">
-                <input type="text" placeholder="defence">
-                <input type="text" placeholder="type">
+                <input type="text" placeholder="name" id="editunitname">
+                <input type="text" placeholder="attack" id="editunitattack">
+                <input type="text" placeholder="defence" id="editunitdefence">
+                <input type="text" placeholder="type" id="editunittype">
                 <button onclick="wijzigUnit()">Wijzig</button>
                 <button onclick="annuleerWijziging()">Annuleren</button>
             </div>
