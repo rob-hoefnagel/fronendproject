@@ -1,3 +1,4 @@
+var baseurl = "http://localhost:8082";
 function opslaan() {
     // Formulier uitlezen
     let nameInvoer = document.getElementById('nieuweSpeler').value;
@@ -25,7 +26,7 @@ function unitAanmaken() {
         }
 
     }
-    xhr.open("POST", "http://localhost:8082/newUnit", true);
+    xhr.open("POST", baseurl+"/newUnit", true);
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.send(deJSON);
 }
@@ -150,6 +151,7 @@ function abc(){
     xhr.open("GET", "http://localhost:8082/toonLijsten", true);
     xhr.send();
     
+
 }
 
 function toevoegenAanTabel() {
