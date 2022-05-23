@@ -152,7 +152,7 @@ function refreshPage(){
 
 
 
-onStartUp();
+
 
 // function spelersOphalen() {
 //     document.getElementById("uitkomstAlles").innerHTML = "";
