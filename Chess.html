@@ -54,10 +54,12 @@
                 <button onclick="wijzigGekozenUnit()">Wijzig</button>
             </div>
             <div class="tabelcentraal" id="allestukkenedit" hidden>
+                <input type="text" placeholder="name" id="editunitid" hidden>
                 <input type="text" placeholder="name" id="editunitname">
                 <input type="text" placeholder="attack" id="editunitattack">
                 <input type="text" placeholder="defence" id="editunitdefence">
-                <input type="text" placeholder="type" id="editunittype">
+               <!-- <input type="text" placeholder="type" id="editunittype"> -->
+               <select id="editunittype"><option value="LEADER">Leader</option><option value="BATTLELINE">BattleLine</option></select>
                 <button onclick="wijzigUnit()">Wijzig</button>
                 <button onclick="annuleerWijziging()">Annuleren</button>
             </div>
