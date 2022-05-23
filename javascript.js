@@ -68,15 +68,22 @@ function onStartUp() {
             select2.innerHTML = "";
             var tabel = document.getElementById("select3");
             select2.innerHTML = "";
+            var editdropdown = document.getElementById("dropdownEditUnits");
             for (var i = 0; i < allUnits.length; i++) {
                 var unitOption2 = document.createElement('option');
                 unitOption2.value = allUnits[i].id;
                 select2.appendChild(unitOption2);
                 unitOption2.innerHTML = allUnits[i].name;
+
                 var unitOption3 = document.createElement('option');
                 unitOption3.value = allUnits[i].id;
                 select3.appendChild(unitOption3);
                 unitOption3.innerHTML = allUnits[i].name;
+                
+                var unitOptionEdit = document.createElement('option');
+                unitOptionEdit.value = allUnits[i].id;
+                editdropdown.appendChild(unitOptionEdit);
+                unitOptionEdit.innerHTML = allUnits[i].name;
             }
 
         }
